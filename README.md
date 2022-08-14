@@ -104,12 +104,11 @@ ubutun:~/ansible-molecule$ source ./.venv/bin/activate
 
 ・Moleculeのrole作成
 ```
-1.Moleculeの起動
-1-1.rolesディレクトリに移動
+1.rolesディレクトリに移動
 (.venv) ubutun:~/ansible-molecule$ cd ./roles/[任意のrole]
 (.venv) ubutun:~/ansible-molecule/[任意のrole]$ molecule init role [任意のid].[任意のrole] --driver-name docker
 
-1-2.molecule.ymlの修正
+2.molecule.ymlの修正
 (.venv) ubutun:~/ansible-molecule/[任意のrole]$ vi ./molecule/defaults/molecule.yml
 [molecule.ymlのplatformに以下を追加(almalinux8.5を使用する場合)]
 platforms:
@@ -119,7 +118,7 @@ platforms:
     command: /sbin/init
     pre_build_image: true
 
-1-3.tasksとvarsを作成
+3.tasksとvarsを作成
 ・[任意のrole]/tasks/main.ymlにtask(処理)を追加する.
 ・[任意のrole]/defaults/main.ymlにvalue(値)を追加する.
 ```
