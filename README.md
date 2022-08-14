@@ -123,10 +123,36 @@ platforms:
 ・[任意のrole]/defaults/main.ymlにvalue(値)を追加する.
 ```
 
-・vaultの設定
+・Vaultの設定
 ```
 ansible-vault encrypt vault.yml
 ansible-vault decrypt vault.yml
+```
+
+・Moleculeのその他コマンド
+```
+・moleculeのターゲットインスタンス作成
+molecule create
+・moleculeのテスト部分の実行
+molecule converge
+・moleculeのターゲットインスタンスへのログイン
+molecule login
+・moleculeのターゲットインスタンス破棄
+molecule destroy
+```
+
+・Ansibleのその他コマンド
+```
+・ansibleの環境変数確認
+ansible-config dump > env.txt
+・ansibleのインベントリ変数の確認
+ansible-inventory -i hosts.yml --list --yaml
+```
+
+・Dockerコマンドでのインスタンス作成例
+```
+・docker-composeで起動する物と同等のコマンド
+docker run -itd --privileged=true --name test-01 almalinux:8.5 /sbin/init
 ```
 
 # Author
