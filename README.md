@@ -34,7 +34,7 @@ ubutun:~/ansible-molecule$ source ./.venv/bin/activate
 ※以降の手順は[source ./.venv/bin/activate]を行った仮想環境で実行する
 
 3.Ansibleの起動
-3-1.docker-composeを起動し
+3-1.docker-composeを起動
 ※別ターミナルでdocker-composeを起動するとよい
 (.venv) ubutun:~/ansible-molecule$ cd ./docker
 (.venv) ubutun:~/ansible-molecule/docker$ docker-compose up -d
@@ -42,9 +42,94 @@ ubutun:~/ansible-molecule$ source ./.venv/bin/activate
 3-2.converge(playbook)の実行
 (.venv) ubutun:~/ansible-molecule$ ansible-playbook -i ./inventory/hosts.yml ./converge.yml --ask-vault-pass
 ※Vault passwordにはtest-01を指定
+
+3-3.docker-composeを終了(コンテナの破棄)
+(.venv) ubutun:~/ansible-molecule/docker$ docker-compose down
+※再度3-1.から実行できる
+
+4.Moleculeの起動
+4-1.rolesディレクトリに移動
+(.venv) ubutun:~/ansible-molecule$ cd ./roles/[任意のrole]
+
+4-2.moleculeの一連のtestを実行
+(.venv) ubutun:~/ansible-molecule/run_all_roles$ molecule test
+```
+# Note
+・ディレクトリ構成
+```
+/home/ubuntu/dev/ansible-molecule
+|--converge.yml
+|--docker
+|  |--docker-compose.yml
+|--files
+|--inventory
+|  |--group_vars
+|  |  |--docker
+|  |  |  |--vars.yml
+|  |  |  |--vault.yml
+|  |--hosts.yml
+|  |--host_vars
+|  |  |--test-01.yml
+|--README.md
+|--requirements.txt
+|--roles
+|  |--add_yum_repository(省略)
+|  |--change_yum_items(省略)
+|  |--create_users_groups(省略)
+|  |--run_all_roles
+|  |  |--defaults
+|  |  |  |--main.yml
+|  |  |--files
+|  |  |--handlers
+|  |  |  |--main.yml
+|  |  |--meta
+|  |  |  |--main.yml
+|  |  |--molecule
+|  |  |  |--default
+|  |  |  |  |--converge.yml
+|  |  |  |  |--molecule.yml
+|  |  |  |  |--verify.yml
+|  |  |--README.md
+|  |  |--tasks
+|  |  |  |--main.yml
+|  |  |--templates
+|  |  |--tests
+|  |  |  |--inventory
+|  |  |  |--test.yml
+|  |  |--.travis.yml
+|  |  |--vars
+|  |  |  |--main.yml
+|  |  |--.yamllint
 ```
 
-# Note
+・Moleculeのrole作成
+```
+1.Moleculeの起動
+1-1.rolesディレクトリに移動
+(.venv) ubutun:~/ansible-molecule$ cd ./roles/[任意のrole]
+(.venv) ubutun:~/ansible-molecule/[任意のrole]$ molecule init role [任意のid].[任意のrole] --driver-name docker
+
+1-2.molecule.ymlの修正
+(.venv) ubutun:~/ansible-molecule/[任意のrole]$ vi ./molecule/defaults/molecule.yml
+[molecule.ymlのplatformに以下を追加(almalinux8.5を使用する場合)]
+platforms:
+  - name: instance
+    image: almalinux:8.5
+    privileged: true
+    command: /sbin/init
+    pre_build_image: true
+
+1-3.tasksとvarsを作成
+・[任意のrole]/tasks/main.ymlにtask(処理)を追加する.
+・[任意のrole]/defaults/main.ymlにvalue(値)を追加する.
+```
+
+・vaultの設定
+```
+ansible-vault encrypt vault.yml
+ansible-vault decrypt vault.yml
+```
+
 # Author
 # Licence
 # Reference
