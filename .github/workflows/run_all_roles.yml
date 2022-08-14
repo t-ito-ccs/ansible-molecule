@@ -25,10 +25,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python3.8 -m pip install --upgrade pip
-          python3.8 -m pip install -r requirements.txt
+#      - name: Install dependencies
+#        run: |
+#          python3.8 -m pip install --upgrade pip
+#          python3.8 -m pip install -r requirements.txt
       - name: Test with molecule
         run: molecule test
         working-directory: ${{ github.workspace }}/roles/run_all_roles
