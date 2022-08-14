@@ -155,6 +155,14 @@ ansible-inventory -i hosts.yml --list --yaml
 docker run -itd --privileged=true --name test-01 almalinux:8.5 /sbin/init
 ```
 
+・run_all_rolesへの追加
+```
+1.converge.ymlへのinclude_roleの追加
+/run_all_roles/molecule/default/converge.ymlに[任意のrole]を追加.
+2./vars/main.ymlへの値の追加
+/run_all_roles/vars/main.ymlに[任意の値]を追加.
+```
+
 # Author
 # Licence
 # Reference
