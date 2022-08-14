@@ -132,3 +132,26 @@ ansible-vault decrypt vault.yml
 # Author
 # Licence
 # Reference
+・参考サイト
+```
+・Ansible：Role の基礎（Ansible 2.9.6）
+https://nwengblog.com/ansible-role/
+
+・molecule でansible の role と playbook をテストする
+https://techblog.szksh.cloud/ansible-molecule/
+
+・Moleculeに入門してみたよ(v3差分確認編)
+https://qiita.com/answer_d/items/78b047eb5708dda1375d
+
+・Ansible Roleを開発、テストするためのMoleculeを試す
+https://kazuhira-r.hatenablog.com/entry/2020/01/18/220000
+
+・インフラCI/CDを学ぶ-molecule編
+https://lightwell-solution.com/blog/ansible/20210712_721/
+
+・Ansible Vaultの使い方の調査
+https://redj.hatenablog.com/entry/2020/05/02/044527#Ansible%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9
+
+・Ansible controller/target を Docker コンテナで構築する
+https://qiita.com/zettaittenani/items/4c5844962ae85f851c29
+```
