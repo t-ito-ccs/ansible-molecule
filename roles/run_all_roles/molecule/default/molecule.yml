@@ -1,0 +1,16 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: almalinux:8.5
+    privileged: true
+    command: /sbin/init
+    pre_build_image: true
+provisioner:
+  name: ansible
+  roles_path: ../../../../roles/
+verifier:
+  name: ansible

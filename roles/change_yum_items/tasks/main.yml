@@ -1,0 +1,19 @@
+---
+# tasks file for change_yum_items
+- name: Change yum items.
+  yum:
+    name: '{{ item.name }}'
+    state: '{{ item.state }}'
+    exclude: '{{ item.exclude }}'
+    enablerepo: '{{ item.enablerepo }}'
+    disablerepo: '{{ item.disablerepo }}'
+    disable_gpg_check: '{{ item.disable_gpg_check }}'
+  with_items:
+    - '{{ yum_items_vars }}'
+- name: Change service items.
+  service:
+    name: '{{ item.name }}'
+    state: '{{ item.state }}'
+    enabled: '{{ item.enabled }}'
+  with_items:
+    - '{{ service_items_vars }}'

@@ -1,0 +1,15 @@
+---
+# vars file for create_users_groups
+groups_vars:
+  - { name: 'test01', gid: '2000' }
+  - { name: 'test02', gid: '3000' }
+users_vars:
+  - { name: 'test01', uid: '2000', group: 'test01', password: 'test01', shell: '/bin/bash' }
+  - { name: 'test02', uid: '3000', group: 'test02', password: 'test02', shell: '/bin/bash' }
+sudores_vars:
+  - { regexp: '^%test01  ALL=NOPASSWD: ALL',
+        insertafter: '^%# %wheel',
+        line: '%test01  ALL=NOPASSWD: ALL' }
+  - { regexp: '^%test02  ALL=NOPASSWD: ALL',
+        insertafter: '^%# %wheel',
+        line: '%test02  ALL=NOPASSWD: ALL' }

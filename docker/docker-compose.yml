@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+    target:
+        image: almalinux:8.5
+        container_name: test-01
+        hostname: test-01
+        networks:
+          - ansible-link
+        privileged: true
+        tty: true
+        command: /sbin/init
+        networks:
+          - ansible-link
+
+# ネットワーク定義
+networks:
+  # defaultネットワークとして全コンテナが所属するbridgeを指定
+  default:
+    external:
+      name: bridge
+  # コンテナ間通信用のネットワークセグメント
+  ansible-link:
+    # ネットワーク名
+    name: docker.internal
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: '172.20.100.0/24'
+

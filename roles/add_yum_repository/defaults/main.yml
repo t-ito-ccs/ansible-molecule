@@ -1,0 +1,4 @@
+---
+# vars file for add_yum_repository
+yum_repository_vars:
+  - { name: 'almalinux-epel', description: 'almalinux-epel', file: 'almalinux-epel', baseurl: 'https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir', enabled: 'false', gpgcheck: 'false' }

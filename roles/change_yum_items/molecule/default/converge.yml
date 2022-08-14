@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible.change_yum_items"
+      include_role:
+        name: "ansible.change_yum_items"

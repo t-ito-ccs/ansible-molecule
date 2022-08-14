@@ -1,0 +1,21 @@
+---
+# vars file for run_all_roles
+yum_items_vars:
+  - { name: 'nginx', state: 'present', exclude: '', enablerepo: '',  disablerepo: '', disable_gpg_check: 'false' }
+  - { name: 'https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm', state: 'present', exclude: '', enablerepo: '',  disablerepo: '', disable_gpg_check: 'true' }
+  - { name: 'zabbix-agent2', state: 'present', exclude: '', enablerepo: '',  disablerepo: '', disable_gpg_check: 'true' }
+service_items_vars:
+  - { name: 'nginx', state: 'started', enabled: 'true' }
+  - { name: 'zabbix-agent2', state: 'started', enabled: 'true' }
+# vars file for add_yum_repository
+yum_repository_vars:
+  - { name: 'almalinux-epel', description: 'almalinux-epel', file: 'almalinux-epel', baseurl: 'https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir', enabled: 'false', gpgcheck: 'false' }
+# vars file for create_users_groups
+groups_vars:
+  - { name: 'test01', gid: '2000' }
+users_vars: 
+  - { name: 'test01', uid: '2000', group: 'test01', password: 'test01', shell: '/bin/bash' }
+sudores_vars:
+  - { regexp: '^%test01  ALL=NOPASSWD: ALL',
+        insertafter: '^%# %wheel',
+        line: '%test01  ALL=NOPASSWD: ALL' }

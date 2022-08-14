@@ -1,0 +1,37 @@
+---
+# tasks file for create_users_groups
+# グループの作成
+- name: Create groups.
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  with_items:
+    - "{{ groups_vars }}"
+# ユーザの作成
+- name: Create users.
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    password: "{{ item.password }}"
+    group: "{{ item.group }}"
+    shell: "{{ item.shell }}"
+  with_items:
+    - "{{ users_vars }}"
+
+- name: check /etc/sudoers
+  stat:
+    path: /etc/sudoers
+  register: chk_file
+# sudoresの追加
+- name: Add sudores.
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "{{ item.regexp | regex_escape() }}"
+    insertafter: "{{ item.insertafter }}"
+    line: "{{ item.line }}"
+    validate: 'usr/sbin/visudo -cd %s'
+  when: chk_file.stat.exists == true
+  ignore_errors: yes
+  with_items:
+    - "{{ sudores_vars }}"

@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: docker
+  roles:
+    - create_users_groups
+    - add_yum_repository
+    - change_yum_items

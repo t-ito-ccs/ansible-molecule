@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  vars_files: ../../vars/main.yml
+  tasks:
+    - name: "include create_users_groups role."
+      include_role:
+        name: "create_users_groups"
+    - name: "include change_yum_items role."
+      include_role:
+        name: "change_yum_items"

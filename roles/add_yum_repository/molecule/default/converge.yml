@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible.add_yum_repository"
+      include_role:
+        name: "ansible.add_yum_repository"
